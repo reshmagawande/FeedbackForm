@@ -1,0 +1,29 @@
+<br />
+<mat-card class="example-card" style="  margin-left: 20rem;">
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space">Multiple Choice - Standard</span>
+  </mat-toolbar>
+  <mat-card-content>
+    <br />
+    <label id="example-radio-group-label">Which is the largest country in world?</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+        {{season}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>
+<br />
+<mat-card class="example-card" style="  margin-left: 20rem;">
+  <mat-toolbar color="primary">
+    <span class="fill-remaining-space">Multiple Choice - Multiple Response</span>
+  </mat-toolbar>
+  <mat-card-content>
+    <br />
+    <label id="example-checkbox-group-label">Which are the following continent?</label>
+    <mat-checkbox aria-labelledby="example-checkbox-group-label" class="example-checkbox-group" 
+    *ngFor="let state of states" [value]="state">
+      {{state}}
+    </mat-checkbox>
+  </mat-card-content>
+</mat-card>
