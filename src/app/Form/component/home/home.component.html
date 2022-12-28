@@ -1,4 +1,14 @@
 <br />
+<form [formGroup]="homeForm">
+<mat-form-field appearance="outline" class="ml-3">
+                <mat-select formControlName="questionTypeCtrl">
+                    <mat-option  *ngFor="let questionTypes of questionTypeList"
+                        [value]="questionTypes">
+                        {{questionTypes.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="ml-3" (click)="add()">Add</button>
 <mat-card class="example-card" style="  margin-left: 20rem;">
   <mat-toolbar color="primary">
     <span class="fill-remaining-space">Multiple Choice - Standard</span>
@@ -27,3 +37,4 @@
     </mat-checkbox>
   </mat-card-content>
 </mat-card>
+</form>
