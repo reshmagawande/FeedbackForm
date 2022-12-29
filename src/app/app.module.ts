@@ -7,15 +7,21 @@ import { HomeComponent } from './Form/component/home/home.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MultipleChoiceStandardComponent } from './Form/component/multiple-choice-standard/multiple-choice-standard.component';
+import { MultipleChoiceMultipleResponseComponent } from './Form/component/multiple-choice-multiple-response/multiple-choice-multiple-response.component';
+import { FillInTheBlankTextComponent } from './Form/component/fill-in-the-blank-text/fill-in-the-blank-text.component';
+import { TableComponent } from './Form/component/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MultipleChoiceStandardComponent
+    MultipleChoiceStandardComponent,
+    MultipleChoiceMultipleResponseComponent,
+    FillInTheBlankTextComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +31,9 @@ import { MultipleChoiceStandardComponent } from './Form/component/multiple-choic
     AngularEditorModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

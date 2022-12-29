@@ -1,40 +1,38 @@
 <br />
 <form [formGroup]="homeForm">
-<mat-form-field appearance="outline" class="ml-3">
-                <mat-select formControlName="questionTypeCtrl">
-                    <mat-option  *ngFor="let questionTypes of questionTypeList"
-                        [value]="questionTypes">
-                        {{questionTypes.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button mat-raised-button color="primary" class="ml-3" (click)="add()">Add</button>
-<mat-card class="example-card" style="  margin-left: 20rem;">
-  <mat-toolbar color="primary">
-    <span class="fill-remaining-space">Multiple Choice - Standard</span>
-  </mat-toolbar>
-  <mat-card-content>
-    <br />
-    <label id="example-radio-group-label">Which is the largest country in world?</label>
-    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-        {{season}}
-      </mat-radio-button>
-    </mat-radio-group>
-  </mat-card-content>
-</mat-card>
-<br />
-<mat-card class="example-card" style="  margin-left: 20rem;">
-  <mat-toolbar color="primary">
-    <span class="fill-remaining-space">Multiple Choice - Multiple Response</span>
-  </mat-toolbar>
-  <mat-card-content>
-    <br />
-    <label id="example-checkbox-group-label">Which are the following continent?</label>
-    <mat-checkbox aria-labelledby="example-checkbox-group-label" class="example-checkbox-group" 
-    *ngFor="let state of states" [value]="state">
-      {{state}}
-    </mat-checkbox>
-  </mat-card-content>
-</mat-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5" >
+        <mat-form-field appearance="outline" class="ml-6" style="width: 25rem !important;">
+          <mat-select formControlName="questionTypeCtrl" placeholder="Select Question Type">
+            <mat-option
+              *ngFor="let questionTypes of questionTypeList"
+              [value]="questionTypes"
+            >
+              {{ questionTypes.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1">
+        <button mat-raised-button color="primary" class="ml-3 mt-3" (click)="add()">
+          Add
+        </button>
+      </div>
+      <div class="col-md-1">
+        <button mat-raised-button color="primary" class="ml-3 mt-3" (click)="preview()">
+          Preview
+        </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="questionIndex == 1">
+      <app-multiple-choice-standard></app-multiple-choice-standard>
+    </div>
+    <div class="row" *ngIf="questionIndex == 2">
+      <app-multiple-choice-multiple-response></app-multiple-choice-multiple-response>
+    </div>
+    <div class="row" *ngIf="questionIndex == 3">
+      <app-fill-in-the-blank-text></app-fill-in-the-blank-text>
+    </div>
+  </div>
 </form>

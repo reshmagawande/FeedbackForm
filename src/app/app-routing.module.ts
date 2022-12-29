@@ -1,16 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FillInTheBlankTextComponent } from './Form/component/fill-in-the-blank-text/fill-in-the-blank-text.component';
 import { HomeComponent } from './Form/component/home/home.component';
+import { MultipleChoiceMultipleResponseComponent } from './Form/component/multiple-choice-multiple-response/multiple-choice-multiple-response.component';
 import { MultipleChoiceStandardComponent } from './Form/component/multiple-choice-standard/multiple-choice-standard.component';
 
-const routes: Routes = [{
-  path:'',
-  component:HomeComponent,
-  pathMatch:'full'
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'multipleChoiceStandard',
+    component: MultipleChoiceStandardComponent
+  },
+  {
+    path: 'multipleChoiceMultipleResponse',
+    component: MultipleChoiceMultipleResponseComponent
+  },
+  {
+    path: 'fillInTheBlanksText',
+    component: FillInTheBlankTextComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

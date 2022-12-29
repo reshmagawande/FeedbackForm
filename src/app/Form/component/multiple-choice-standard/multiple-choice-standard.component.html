@@ -1,4 +1,36 @@
-<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
-<br/>
-<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
-<!-- <angular-editor formControlName="htmlContent" [config]="config"></angular-editor> -->
+<div class="container">
+  <div class="row mb-12">
+    <div class="col-md-12">
+      <mat-toolbar>
+        <mat-icon> forum</mat-icon>
+        <span class="ml-2">Compose question (Multiple Choice - Standard)</span>
+      </mat-toolbar>
+      <angular-editor
+        [(ngModel)]="multipleChoiceStandardQuestion"
+        [config]="config"
+      ></angular-editor>
+    </div>
+  </div>
+</div>
+<button mat-raised-button color="primary" class="ml-3 mt-3 mb-3" (click)="onAddoption()" *ngIf="multipleChoiceStandardQuestion">
+  Add Option
+</button>
+<div class="container" *ngIf="showOptionEditor">
+  <div class="row mb-12">
+    <div class="col-md-12">
+      <mat-toolbar>
+        <span class="ml-2">Add Options</span>
+      </mat-toolbar>
+      <angular-editor
+        [(ngModel)]="multipleChoiceStandardOption"
+        [config]="option"
+      ></angular-editor>
+    </div>
+  </div>
+</div>
+<button mat-raised-button color="primary" class="ml-3 mt-3 " (click)="onSubmit()" *ngIf="multipleChoiceStandardOption">
+ Submit
+</button>
+<div class="col-md-12" *ngIf="showTable" >
+  <app-table></app-table>
+</div>
