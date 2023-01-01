@@ -2,13 +2,10 @@
 <form [formGroup]="homeForm">
   <div class="container">
     <div class="row">
-      <div class="col-md-5" >
+      <div class="col-md-5">
         <mat-form-field appearance="outline" class="ml-6" style="width: 25rem !important;">
           <mat-select formControlName="questionTypeCtrl" placeholder="Select Question Type">
-            <mat-option
-              *ngFor="let questionTypes of questionTypeList"
-              [value]="questionTypes"
-            >
+            <mat-option *ngFor="let questionTypes of questionTypeList" [value]="questionTypes">
               {{ questionTypes.name }}
             </mat-option>
           </mat-select>

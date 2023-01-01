@@ -4,6 +4,7 @@ import { FillInTheBlankTextComponent } from './Form/component/fill-in-the-blank-
 import { HomeComponent } from './Form/component/home/home.component';
 import { MultipleChoiceMultipleResponseComponent } from './Form/component/multiple-choice-multiple-response/multiple-choice-multiple-response.component';
 import { MultipleChoiceStandardComponent } from './Form/component/multiple-choice-standard/multiple-choice-standard.component';
+import { PreviewFormComponent } from './Form/component/preview-form/preview-form.component';
 
 const routes: Routes = [
   {
@@ -13,16 +14,20 @@ const routes: Routes = [
   },
   {
     path: 'multipleChoiceStandard',
-    component: MultipleChoiceStandardComponent
+    component: MultipleChoiceStandardComponent,
   },
   {
     path: 'multipleChoiceMultipleResponse',
-    component: MultipleChoiceMultipleResponseComponent
+    component: MultipleChoiceMultipleResponseComponent,
   },
   {
     path: 'fillInTheBlanksText',
-    component: FillInTheBlankTextComponent
-  }
+    component: FillInTheBlankTextComponent,
+  },
+  {
+    path: 'previewForm',
+    component: PreviewFormComponent,
+  },
 ];
 
 @NgModule({
