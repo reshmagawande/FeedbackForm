@@ -74,7 +74,12 @@ export class FillInTheBlankTextComponent implements OnInit {
       },
     ],
   };
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let questionData = this.localStorageService.getData('Question');
+    if(questionData){
+      this.showTable = true;
+    }
+  }
 
   onSubmit() {
     this.showTable = true;

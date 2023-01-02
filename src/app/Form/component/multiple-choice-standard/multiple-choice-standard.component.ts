@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Subject } from 'rxjs';
 import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { TableComponent } from '../table/table.component';
-// import {  } from 'ngx-bootstrap-modal';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,13 +23,11 @@ export class MultipleChoiceStandardComponent implements OnInit {
   showOptionEditor: boolean = false;
   multipleChoiceStandardOption: any = [];
   showTable: boolean = false;
-  newQuestionList: any = [];
   qlist: any = [];
   Array: any = [];
   newArray: any = [];
   multipleChoiceStdQuestionData: any = [];
-  questionvalue: string = '';
-  key: string = 'multipleChoiceStandardQuestion';
+ 
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -128,12 +124,11 @@ export class MultipleChoiceStandardComponent implements OnInit {
   };
   ngOnInit(): void {
 
-    let multipleChoiceStandardQuestionData = this.localStorageService.getData('Question');
-    if(multipleChoiceStandardQuestionData){
+    let questionData = this.localStorageService.getData('Question');
+    if(questionData){
       this.showTable = true;
     }
-    // console.log(this.questionvalue);
-  }
+   }
 
   onAddoption() {
     this.showOptionEditor = true;

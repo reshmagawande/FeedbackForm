@@ -5,9 +5,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ComponentCommunicationService {
-
-
-
   constructor() { }
   flag = new Subject<any>();
 
