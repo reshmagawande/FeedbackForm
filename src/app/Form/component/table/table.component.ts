@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { ComponentCommunicationService } from '../../services/component-communication.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-table',
@@ -9,21 +11,32 @@ import { ComponentCommunicationService } from '../../services/component-communic
 })
 export class TableComponent implements OnInit {
   // dataSource = new MatTableDataSource<any>();
+
   dataSource: any;
-  constructor( private componentCommunicationService: ComponentCommunicationService) { }
+  tabledata: Subscription | undefined
+  constructor( private componentCommunicationService: ComponentCommunicationService,
+    private localStorageService: LocalStorageService) {
+   
+  this.tableData();
+
+   }
 
   ngOnInit(): void {
- 
-  this.getTableData();
+    let data =localStorage.getItem('multipleChoiceStandardQuestion');
+    this.tableData();
   }
 
   getTableData() {
     this.componentCommunicationService.subscriber$.subscribe(data => {
       console.log(data);
       this.dataSource = data;
-      console.log('this.dataSource >>>>',this.dataSource);
-
     });
+  }
+
+  tableData(){
+    let multipleChoiceStandardQuestionData = this.localStorageService.getData('Question');
+    this.dataSource = multipleChoiceStandardQuestionData;
+
   }
 
   displayedColumns: Array<string> = [
@@ -32,11 +45,8 @@ export class TableComponent implements OnInit {
     'question',
     'actions'
   ]
-  EXAMPLE_DATA = [
-    {questionType: 'Multiple Choice - Standard', question: 'Which is the largest country in the world?', },
-    { questionType:'Multiple Choice - Multiple Response', question: 'Which of the following are continents?', },
-    { questionType:'Fill In The Blanks - Text', question: '________ is the largest country in the world?',  },
-    {questionType:  'Fill In The Blanks - Dropdown', question: '________^ of the following arethe continents?',},
-  ]
-
+ 
+ngOnDestroy(){
+  this.tabledata?.unsubscribe();
+}
 }

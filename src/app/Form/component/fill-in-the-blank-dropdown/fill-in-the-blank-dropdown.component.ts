@@ -1,50 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subject } from 'rxjs';
 import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { TableComponent } from '../table/table.component';
-// import {  } from 'ngx-bootstrap-modal';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-multiple-choice-standard',
-  templateUrl: './multiple-choice-standard.component.html',
-  styleUrls: ['./multiple-choice-standard.component.css'],
+  selector: 'app-fill-in-the-blank-dropdown',
+  templateUrl: './fill-in-the-blank-dropdown.component.html',
+  styleUrls: ['./fill-in-the-blank-dropdown.component.css']
 })
-export class MultipleChoiceStandardComponent implements OnInit {
-  constructor(
-    private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService,
-    private router: Router
-  ) {}
+export class FillInTheBlankDropdownComponent implements OnInit {
+
+  constructor(private localStorageService: LocalStorageService,
+    private componentCommunicationService: ComponentCommunicationService) { }
 
   ngOnInit(): void {
-
-    this.questionvalue = this.multipleChoiceStandardQuestion.replace(
-      /<[^>]+>/g,
-      ''
-    );
-    console.log(this.questionvalue);
   }
-  multipleChoiceStandardQuestion = '';
-  showOptionEditor: boolean = false;
-  multipleChoiceStandardOption: any = [];
-  showTable: boolean = false;
+  fillInTheBlankDropdownQuestion: string = '';
+    showTable:boolean = false;
+  showOptionEditor:boolean = false;
+  fillInTheBlankDropdownOption:string = '';
   newQuestionList: any = [];
-  qlist: any = [];
-  Array: any = [];
-  newArray: any = [];
-  multipleChoiceStdQuestionData: any = [];
-  questionvalue: string = '';
-  key: string = 'multipleChoiceStandardQuestion';
-  config: AngularEditorConfig = {
+  fillInTheBlankQueData: any =[];
+  qlist:any = [];
+  newArray : any =[];
+  Array : any =[];
+  question: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '7rem',
     minHeight: '5rem',
-    placeholder: 'Enter question here...',
+    placeholder: 'Enter text here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
@@ -61,7 +46,7 @@ export class MultipleChoiceStandardComponent implements OnInit {
         'insertHorizontalRule',
         'clearFormatting',
         'customClasses',
-        'fontSize',
+        'fontSize'
       ],
     ],
     fonts: [
@@ -86,12 +71,13 @@ export class MultipleChoiceStandardComponent implements OnInit {
       },
     ],
   };
+
   option: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '7rem',
     minHeight: '5rem',
-    placeholder: 'Enter options here...',
+    placeholder: 'Enter text here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
@@ -108,7 +94,7 @@ export class MultipleChoiceStandardComponent implements OnInit {
         'insertHorizontalRule',
         'clearFormatting',
         'customClasses',
-        'fontSize',
+        'fontSize'
       ],
     ],
     fonts: [
@@ -133,55 +119,61 @@ export class MultipleChoiceStandardComponent implements OnInit {
       },
     ],
   };
-  onAddoption() {
-    this.showOptionEditor = true;
-    this.multipleChoiceStandardQuestion;
+  onAddoption(){
+    this.showOptionEditor=true;
   }
+
   
-
   onSubmit() {
+    
     this.showTable = true;
-
+  
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
       
-      this.multipleChoiceStandardOption =
-        this.multipleChoiceStandardOption.replace(/<p>/gm, ',');
-      this.multipleChoiceStandardOption =
-        this.multipleChoiceStandardOption.replace(/<[^>]+>/gm, '');
-          let option = this.multipleChoiceStandardOption.split(",");
+      this.fillInTheBlankDropdownOption =
+        this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
+      this.fillInTheBlankDropdownOption =
+        this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
+      let option = this.fillInTheBlankDropdownOption.split(",");
       this.qlist = {
-        id: 1,
-        questionType: 'Multiple Choice - Standard',
-        question: this.multipleChoiceStandardQuestion.replace(/<[^>]+>/g, ''),
+        id: 4,
+        questionType: 'Fill-in-the-blank-dropdown',
+        question: this.fillInTheBlankDropdownQuestion.replace(/<[^>]+>/g, ''),
         option: option,
       };
       this.Array.push(this.qlist); 
       this.localStorageService.set('Question', this.Array);
-         this.showOptionEditor = false;
-    this.multipleChoiceStandardOption = '';
-    this.multipleChoiceStandardQuestion = '';
+      this.showOptionEditor = false;
+      this.fillInTheBlankDropdownOption = '';
+      this.fillInTheBlankDropdownQuestion = '';
     }
     else
     {
      
       this.Array = JSON.parse(this.newArray);
-      this.multipleChoiceStandardOption = this.multipleChoiceStandardOption.replace(/<p>/gm, ',');
-      this.multipleChoiceStandardOption = this.multipleChoiceStandardOption.replace(/<[^>]+>/gm, '');
-         let option = this.multipleChoiceStandardOption.split(",");
+      this.fillInTheBlankDropdownOption = this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
+      this.fillInTheBlankDropdownOption = this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
+      let option = this.fillInTheBlankDropdownOption.split(",");
       this.qlist = {
-        id: 1,
-        questionType: 'Multiple Choice - Standard',
-        question: this.multipleChoiceStandardQuestion.replace(/<[^>]+>/g, ''),
+        id: 4,
+        questionType: 'Fill-in-the-blank-dropdown',
+        question: this.fillInTheBlankDropdownQuestion.replace(/<[^>]+>/g, ''),
         option: option,
       };
   
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
-      this.showOptionEditor = false;
-      this.multipleChoiceStandardOption = '';
-      this.multipleChoiceStandardQuestion = '';
+    //   let data = this.localStorageService.getData('Question');
+    // this.fillInTheBlankQueData = data;
+    // this.componentCommunicationService.emitData(fillInTheBlankQueData)
+    this.showOptionEditor = false;
+    this.fillInTheBlankDropdownOption = '';
+    this.fillInTheBlankDropdownQuestion = '';
+
     }
     
   }
+
+
 }

@@ -13,6 +13,10 @@ import { MultipleChoiceStandardComponent } from './Form/component/multiple-choic
 import { MultipleChoiceMultipleResponseComponent } from './Form/component/multiple-choice-multiple-response/multiple-choice-multiple-response.component';
 import { FillInTheBlankTextComponent } from './Form/component/fill-in-the-blank-text/fill-in-the-blank-text.component';
 import { TableComponent } from './Form/component/table/table.component';
+import { FillInTheBlankDropdownComponent } from './Form/component/fill-in-the-blank-dropdown/fill-in-the-blank-dropdown.component';
+import { TopNavbarComponent } from './Form/component/top-navbar/top-navbar.component';
+import { PreviewFormComponent } from './Form/component/preview-form/preview-form.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { TableComponent } from './Form/component/table/table.component';
     MultipleChoiceStandardComponent,
     MultipleChoiceMultipleResponseComponent,
     FillInTheBlankTextComponent,
-    TableComponent
+    TableComponent,
+    FillInTheBlankDropdownComponent,
+    TopNavbarComponent,
+    PreviewFormComponent
   ],
   imports: [
     BrowserModule,

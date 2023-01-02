@@ -9,11 +9,15 @@ export class ComponentCommunicationService {
 
 
   constructor() { }
+  flag = new Subject<any>();
 
  observer = new Subject();
   public subscriber$ = this.observer.asObservable();
 
-  emitData(data: unknown) {
-    this.observer.next(data);
+  emitData(data: any) {
+    this.flag.next(data);
+  }
+  getEmittedData(){
+    return this.flag.asObservable();
   }
 }

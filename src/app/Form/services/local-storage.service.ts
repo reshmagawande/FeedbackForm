@@ -22,4 +22,21 @@ export class LocalStorageService {
   }
 
   removeData() {}
+
+  set(key: any, data: any): void {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+      console.error('Error saving to localStorage', e);
+    }
+  }
+
+  get(key: any) {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      console.error('Error getting data from localStorage', e);
+      return null;
+    }
+  }
 }

@@ -5,32 +5,28 @@
         <mat-icon> forum</mat-icon>
         <span class="ml-2">Compose question (Multiple Choice - Standard)</span>
       </mat-toolbar>
-      <angular-editor
-        [(ngModel)]="multipleChoiceStandardQuestion"
-        [config]="config"
-      ></angular-editor>
+      <angular-editor [(ngModel)]="multipleChoiceStandardQuestion" [config]="config"></angular-editor>
     </div>
   </div>
 </div>
-<button mat-raised-button color="primary" class="ml-3 mt-3 mb-3" (click)="onAddoption()" *ngIf="multipleChoiceStandardQuestion">
+<button mat-raised-button color="primary" class="ml-3 mt-3 mb-3" (click)="onAddoption()"
+  *ngIf="multipleChoiceStandardQuestion && multipleChoiceStandardQuestion.trim() != ''">
   Add Option
 </button>
-<div class="container" *ngIf="showOptionEditor">
+<div class="container" *ngIf="showOptionEditor && multipleChoiceStandardQuestion">
   <div class="row mb-12">
     <div class="col-md-12">
       <mat-toolbar>
         <span class="ml-2">Add Options</span>
       </mat-toolbar>
-      <angular-editor
-        [(ngModel)]="multipleChoiceStandardOption"
-        [config]="option"
-      ></angular-editor>
+      <angular-editor [(ngModel)]="multipleChoiceStandardOption" [config]="option"></angular-editor>
     </div>
   </div>
 </div>
-<button mat-raised-button color="primary" class="ml-3 mt-3 " (click)="onSubmit()" *ngIf="multipleChoiceStandardOption">
- Submit
+<button mat-raised-button color="primary" class="ml-3 mt-3 " (click)="onSubmit()"
+  *ngIf="multipleChoiceStandardOption && multipleChoiceStandardOption!=' ' && multipleChoiceStandardQuestion">
+  Submit
 </button>
-<div class="col-md-12" *ngIf="showTable" >
+<div class="container" *ngIf="showTable">
   <app-table></app-table>
 </div>

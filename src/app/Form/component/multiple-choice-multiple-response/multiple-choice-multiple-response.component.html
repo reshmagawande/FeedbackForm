@@ -12,10 +12,10 @@
     </div>
   </div>
 </div>
-<button mat-raised-button color="primary" class="ml-3 mt-3 mb-3" (click)="onAddoption()" *ngIf="multipleChoiceMultiResponseQuestion">
+<button mat-raised-button color="primary" class="ml-3 mt-3 mb-3" (click)="onAddoption()" *ngIf="multipleChoiceMultiResponseQuestion && multipleChoiceMultiResponseQuestion.trim() != ''">
   Add Option
 </button>
-<div class="container" *ngIf="showOptionEditor">
+<div class="container" *ngIf="showOptionEditor && multipleChoiceMultiResponseQuestion">
   <div class="row mb-12">
     <div class="col-md-12">
       <mat-toolbar>
@@ -32,6 +32,9 @@
   mat-raised-button
   color="primary"
   class="ml-3 mt-3 mb-3"
-  (click)="onConfirmQuestion()" *ngIf="multipleChoiceMultiResponseOption">
+  (click)="onSubmit()" *ngIf="multipleChoiceMultiResponseOption && multipleChoiceMultiResponseQuestion">
   Submit
 </button>
+<div class="col-md-12" *ngIf="showTable" >
+  <app-table></app-table>
+</div>

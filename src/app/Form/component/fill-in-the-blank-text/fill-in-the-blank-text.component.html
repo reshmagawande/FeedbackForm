@@ -8,102 +8,16 @@
         <mat-icon> forum</mat-icon>
         <span class="ml-2">Compose question (Fill in the Blanks - Text)</span>
       </mat-toolbar>
-      <angular-editor
-        [(ngModel)]="fillInTheBlankTextQuestion"
-        [config]="question"
-        class="editor"
-      ></angular-editor
-      ><br />
-      <button mat-raised-button color="primary" class="ml-3" (click)="addRow()">
-        Add Answer
+      <angular-editor [(ngModel)]="fillInTheBlankTextQuestion" [config]="question"
+        class="editor"></angular-editor><br />
+      <button mat-raised-button color="primary" class="ml-3" (click)="onSubmit()"  *ngIf="fillInTheBlankTextQuestion">
+        Submit
       </button>
     </div>
   </div>
 </div>
-<br />
-<!-- <div class="container">
-  <div class="row">
-    <div class="row mb-4">
-      <div class="col-md-2">
-        <label for="answers">Answer</label>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <input
-        type="text"
-        class="form-control"
-        value=""
-        rows="4"
-        pInputText
-        pTooltip="Enter Attribute/Column Name"
-        [(ngModel)]="answer"
-      />
-    </div>
-    <div class="col-md-5">
-      <input
-        type="text"
-        class="form-control"
-        value=""
-        rows="4"
-        pInputText
-        pTooltip="Enter Attribute/Column Name"
-        [(ngModel)]="answer"
-      />
-    </div>
-    <div class="col-md-2">
-      <button mat-raised-button color="warn" class="ml-3" (click)="onDelete(1)">
-        Remove Answer
-      </button>
-    </div>
-  </div>
-</div> -->
-<div class="container">
-  <div class="container" style="margin-top: 5%">
-    <table>
-      <thead>
-        <!-- <tr>
-          <th>Action</th>
-          <th>Nmae</th>
-          
-        </tr> -->
-      </thead>
-      <tbody>
-        <!-- <tr *ngFor="let dynamic of dynamicArray; let i = index">
-            <td>
-                <label for="answers">Answer</label>
-            </td>
-          <td>
-            <input
-              [(ngModel)]="dynamicArray[i].name"
-              class="form-control"
-              type="text"
-            />
-          </td>
-          <td>
-            <input
-              [(ngModel)]="dynamicArray[i].email"
-              class="form-control"
-              type="email"
-            />
-          </td> -->
+<div class="container" *ngIf="showTable">
+  <app-table></app-table>
+</div>
 
-          <!-- <td (click)="deleteRow(i)">
-            <button
-              mat-raised-button
-              color="warn"
-              class="ml-3"
-              (click)="onDelete(1)"
-            >
-              Remove
-            </button>
-          </td>
-        </tr> -->
-        <tr>
-          <td></td>
-          <td></td>
-       
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+ 

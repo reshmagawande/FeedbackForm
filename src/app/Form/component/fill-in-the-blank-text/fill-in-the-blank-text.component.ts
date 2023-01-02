@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-// import { DynamicGrid } from './DynamicGrid';
+import { DynamicGrid } from '../../model/DynamicGrid';
+import { ComponentCommunicationService } from '../../services/component-communication.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-fill-in-the-blank-text',
@@ -8,17 +10,22 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./fill-in-the-blank-text.component.css'],
 })
 export class FillInTheBlankTextComponent implements OnInit {
-  constructor() {}
+  constructor(private localStorageService: LocalStorageService,
+    private componentCommunicationService: ComponentCommunicationService
+    ) {}
 
-  // dynamicArray: Array<DynamicGrid> = [];
+dynamicArray: Array<DynamicGrid> = [];
   newDynamic: any = {};
-  ngOnInit(): void {
-    this.newDynamic = { name: '', email: '', phone: '' };
-    // this.dynamicArray.push(this.newDynamic);
-  }
+ 
   fillInTheBlankTextQuestion: string = '';
   answer: string = '';
+  qlist:any = [];
+newArray : any =[];
+Array : any =[];
   answers: string[] = [];
+   newQuestionList: any = [];
+  showTable: boolean = false;
+  fillInTheBlankTextQueData: any = [];
   question: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -66,40 +73,49 @@ export class FillInTheBlankTextComponent implements OnInit {
       },
     ],
   };
-  onAddoption() {
-    this.fillInTheBlankTextQuestion;
-    localStorage.setItem(
-      'fillInTheBlankTextQuestion',
-      this.fillInTheBlankTextQuestion
-    );
-  }
-  addAnswer(num1: any) {
-    console.log(num1);
-    this.answers.push(num1);
-
-    console.log(this.answers);
-    this.answer = '';
-  }
-  onDelete(num1: any) {
-    this.answers = this.answers.filter((e) => e !== num1);
+  ngOnInit(): void {
+  
   }
 
-  addRow() {    
-    // this.newDynamic = {name: "", email: "",phone:""};  
-    //   this.dynamicArray.push(this.newDynamic);  
-    //  // this.toastr.success('New row added successfully', 'New Row');  
-    //   console.log(this.dynamicArray);  
-    //   return true;  
-  }  
+ 
 
-  deleteRow(index:any) {  
-      // if(this.dynamicArray.length ==1) {  
-    //  //   this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
-    //       return false;  
-    //   } else {  
-    //       this.dynamicArray.splice(index, 1);  
-    //   //    this.toastr.warning('Row deleted successfully', 'Delete row');  
-    //       return true;  
-    //   }  
+  onSubmit() {
+    
+    this.showTable = true;
+  
+    this.newArray = localStorage.getItem('Question');
+    if (this.newArray == null) {
+                  
+      this.qlist = {
+        id: 3,
+        questionType: 'Fill-in-the-blank-text',
+        question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
+        option: 'Answer',
+      };
+      this.Array.push(this.qlist); 
+      this.localStorageService.set('Question', this.Array);
+      this.fillInTheBlankTextQuestion = '';
+    }
+    else
+    {
+     
+      this.Array = JSON.parse(this.newArray);
+      this.qlist = {
+            id: 3,
+        questionType: 'Fill-in-the-blank-text',
+        question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
+        option: 'Answer',
+      };
+  
+      this.Array.push(this.qlist);
+      this.localStorageService.set('Question', this.Array);
+     
+      this.fillInTheBlankTextQuestion = '';
+    }
+    
   }
+
+
+
+
 }
