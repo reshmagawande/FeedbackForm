@@ -22,7 +22,7 @@ export class TableComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    let data =localStorage.getItem('multipleChoiceStandardQuestion');
+    let data =localStorage.getItem('Question');
     this.tableData();
   }
 
@@ -43,8 +43,13 @@ export class TableComponent implements OnInit {
     // 'index',
     'questionType',
     'question',
+    'options',
     'actions'
   ]
+
+  onEdit(row){
+console.log('row>>>.',row);
+  }
  
 ngOnDestroy(){
   this.tabledata?.unsubscribe();

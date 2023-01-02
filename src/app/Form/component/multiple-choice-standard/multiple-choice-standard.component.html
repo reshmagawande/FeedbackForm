@@ -23,8 +23,7 @@
     </div>
   </div>
 </div>
-<button mat-raised-button color="primary" class="ml-3 mt-3 " (click)="onSubmit()"
-  *ngIf="multipleChoiceStandardOption && multipleChoiceStandardOption!=' ' && multipleChoiceStandardQuestion">
+<button mat-raised-button color="primary" class="ml-3 mt-3 " (click)="onSubmit()" *ngIf="multipleChoiceStandardOption && multipleChoiceStandardOption!='' && multipleChoiceStandardQuestion">
   Submit
 </button>
 <div class="container" *ngIf="showTable">
