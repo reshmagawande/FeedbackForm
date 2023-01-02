@@ -37,7 +37,7 @@ export class TableComponent implements OnInit {
   }
 
   displayedColumns: Array<string> = [
-    // 'index',
+    'index',
     'questionType',
     'question',
     'options'

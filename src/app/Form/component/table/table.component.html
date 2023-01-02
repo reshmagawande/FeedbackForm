@@ -1,13 +1,13 @@
 <!-- Table start -->
 <div class="mat-elevation-z8  mt-5">
 <table mat-table [dataSource]="dataSource" class="table">
-    <!-- <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef width="10%">
-           Sr. No.
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container> -->
-    <ng-container matColumnDef="questionType">
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef width="10%">
+      Sr. No.
+   </th>
+   <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
+  </ng-container>
+      <ng-container matColumnDef="questionType">
       <th mat-header-cell *matHeaderCellDef width="35%">
         Question Type
       </th>
