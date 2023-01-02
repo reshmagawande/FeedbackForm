@@ -20,14 +20,7 @@ export class MultipleChoiceStandardComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
 
-    this.questionvalue = this.multipleChoiceStandardQuestion.replace(
-      /<[^>]+>/g,
-      ''
-    );
-    console.log(this.questionvalue);
-  }
   multipleChoiceStandardQuestion = '';
   showOptionEditor: boolean = false;
   multipleChoiceStandardOption: any = [];
@@ -133,12 +126,20 @@ export class MultipleChoiceStandardComponent implements OnInit {
       },
     ],
   };
+  ngOnInit(): void {
+
+    let multipleChoiceStandardQuestionData = this.localStorageService.getData('Question');
+    if(multipleChoiceStandardQuestionData){
+      this.showTable = true;
+    }
+    // console.log(this.questionvalue);
+  }
+
   onAddoption() {
     this.showOptionEditor = true;
     this.multipleChoiceStandardQuestion;
   }
   
-
   onSubmit() {
     this.showTable = true;
 
