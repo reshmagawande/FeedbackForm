@@ -13,7 +13,6 @@ export class MultipleChoiceMultipleResponseComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService,
     private componentCommunicationService: ComponentCommunicationService) {}
 
-  ngOnInit(): void {}
   multipleChoiceMultiResponseQuestion = '';
   showOptionEditor: boolean = false;
   multipleChoiceMultiResponseOption: string = '';
@@ -109,43 +108,20 @@ Array : any =[];
     ],
   };
 
+  ngOnInit(): void {  let questionData = this.localStorageService.getData('Question');
+  if(questionData){
+    this.showTable = true;
+  }}
+
   onAddoption() {
     this.showOptionEditor = true;
     this.multipleChoiceMultiResponseQuestion;
       
   }
 
-
-
-  // onSubmit() {
-  //   this.showTable=true;
-  //   let newArray: any;
-   
-  //   this.multipleChoiceMultiResponseOption = this.multipleChoiceMultiResponseOption.replace(/<p>/gm, ',')
-  //   this.multipleChoiceMultiResponseOption = this.multipleChoiceMultiResponseOption.replace(/<[^>]+>/gm, '')
-  //   this.multipleChoiceMultiResponseOption = JSON.stringify(this.multipleChoiceMultiResponseOption)
-  //   let option = JSON.parse("[" + this.multipleChoiceMultiResponseOption + "]");
-
-  //   newArray = 
-  //     {
-  //       id: 2,
-  //       questionType: 'Multiple Choice - Multiple Response',
-  //       question: this.multipleChoiceMultiResponseQuestion.replace(/<[^>]+>/g, ''),
-  //       option: option
-  //     }
-  //   this.newQuestionList.push(newArray)
-  //   this.localStorageService.setData('Question', JSON.stringify(this.newQuestionList));
-  //   // let multipleChoiceMultiResponseQuestionData = this.localStorageService.getData('Question');
-
-  //   // this.componentCommunicationService.emitData(multipleChoiceMultiResponseQuestionData)
-  //   this.showOptionEditor = false;
-  //   this.multipleChoiceMultiResponseOption = '';
-  //   this.multipleChoiceMultiResponseQuestion = '';
-   
-  // }
   onSubmit() {
     
-  this.showTable = true;
+  this.showTable = false;
 
   this.newArray = localStorage.getItem('Question');
   if (this.newArray == null) {
@@ -183,6 +159,10 @@ Array : any =[];
 
     this.Array.push(this.qlist);
     this.localStorageService.set('Question', this.Array);
+        let multipleChoiceMultiResponseQuestionData = this.localStorageService.getData('Question');
+
+    this.componentCommunicationService.emitData(multipleChoiceMultiResponseQuestionData)
+  this.showTable = true;
     this.showOptionEditor = false;
     this.multipleChoiceMultiResponseOption = '';
     this.multipleChoiceMultiResponseQuestion = '';

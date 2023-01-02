@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnChanges, Input} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ComponentCommunicationService } from '../../services/component-communication.service';
@@ -11,7 +11,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class TableComponent implements OnInit {
   // dataSource = new MatTableDataSource<any>();
-
+  @Input() tableInput: [];
+  
   dataSource: any;
   tabledata: Subscription | undefined
   constructor( private componentCommunicationService: ComponentCommunicationService,
@@ -22,15 +23,11 @@ export class TableComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    let data =localStorage.getItem('Question');
     this.tableData();
   }
-
-  getTableData() {
-    this.componentCommunicationService.subscriber$.subscribe(data => {
-      console.log(data);
-      this.dataSource = data;
-    });
+  ngOnChanges(){
+    console.log(this.tableInput);
+    this.dataSource = this.tableInput;
   }
 
   tableData(){
@@ -40,11 +37,11 @@ export class TableComponent implements OnInit {
   }
 
   displayedColumns: Array<string> = [
-    // 'index',
+    'index',
     'questionType',
     'question',
-    'options',
-    'actions'
+    'options'
+    // ,'actions'
   ]
 
   onEdit(row){
