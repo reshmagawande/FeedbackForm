@@ -5,16 +5,31 @@
         </div>
 
         <div *ngFor="let list of dataList; let i = index">
-            <div>{{ list.question }}</div>
-            <div *ngFor="let sublist of list['option']; let l = index">
-                <div *ngIf="list.id === 1">
-                    <input type="radio" value="sublist" (click)="selectAnswer(i, sublist)" />
+            <div>{{i+1}}. {{ list.question }}</div>
+            <div *ngFor="let sublist of list['option']; let index = index">
+                <div *ngIf="list.id === 1" class="ml-3">
+                    <input type="radio" value="sublist" (click)="selectAnswer(i, sublist)" name="sublist" />
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
-                <div *ngIf="list.id === 2">
-                    <input type="checkbox" value="sublist" (click)="selectAnswer(i, sublist)" />
+                <div *ngIf="list.id === 2" class="ml-3">
+                    <input type="checkbox" value="sublist" (click)="selectAnswer(i, sublist)" name="sublist" />
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
+                <div *ngIf="list.id === 3" class="ml-3">
+                    <input type="text" value="sublist" (click)="selectAnswer(i, sublist)" />
+                    <label class="ml-1">{{ sublist }}</label>
+                </div>
+            </div>
+            <div *ngIf="list.id === 4" class="ml-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Please Select</mat-label>
+                    <mat-select>
+                        <mat-option [value]="sublist" *ngFor="let sublist of list['option']; let index = index"
+                            (click)="selectAnswer(i, sublist)">
+                            {{sublist}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
 

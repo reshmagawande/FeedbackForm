@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { PreviewFormModel } from '../../model/previewForm';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -14,9 +15,12 @@ export class PreviewFormComponent {
   dataList: any = [];
   optionList: any = [];
   previewFormObj = PreviewFormModel;
+  selectedValue: string;
+
   constructor(
     private fb: FormBuilder,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,10 +28,7 @@ export class PreviewFormComponent {
       questionAnswer: this.fb.array([]),
     });
 
-    this.dataList = this.localStorageService.getData(
-      'Question'
-    );
-
+    this.dataList = this.localStorageService.getData('Question');
 
     this.dataList.forEach((e) => {
       let frmControl: FormGroup = this.fb.group({
@@ -47,13 +48,8 @@ export class PreviewFormComponent {
 
   getOrders() {
     this.dataList.forEach((element: { option: any }) => {
-      console.log('datA',element.option)
       return (this.optionList = element.option);
     });
-  }
-
-  onChange(selectedOption: any) {
-    console.log('selectedOption.source.value', selectedOption.source.value);
   }
 
   selectAnswer(index, answer) {
@@ -73,5 +69,7 @@ export class PreviewFormComponent {
       'questionAndAnswer',
       JSON.stringify(this.previewFormObj)
     );
+
+    this.router.navigate(['/response-screen']);
   }
 }

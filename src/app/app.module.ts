@@ -16,7 +16,7 @@ import { TableComponent } from './Form/component/table/table.component';
 import { FillInTheBlankDropdownComponent } from './Form/component/fill-in-the-blank-dropdown/fill-in-the-blank-dropdown.component';
 import { TopNavbarComponent } from './Form/component/top-navbar/top-navbar.component';
 import { PreviewFormComponent } from './Form/component/preview-form/preview-form.component';
-
+import { ResponseScreenComponent } from './Form/component/response-screen/response-screen.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { PreviewFormComponent } from './Form/component/preview-form/preview-form
     TableComponent,
     FillInTheBlankDropdownComponent,
     TopNavbarComponent,
-    PreviewFormComponent
+    PreviewFormComponent,
+    ResponseScreenComponent,
   ],
   imports: [
     BrowserModule,

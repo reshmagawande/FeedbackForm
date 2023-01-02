@@ -10,20 +10,21 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./fill-in-the-blank-text.component.css'],
 })
 export class FillInTheBlankTextComponent implements OnInit {
-  constructor(private localStorageService: LocalStorageService,
+  constructor(
+    private localStorageService: LocalStorageService,
     private componentCommunicationService: ComponentCommunicationService
-    ) {}
+  ) {}
 
-dynamicArray: Array<DynamicGrid> = [];
+  dynamicArray: Array<DynamicGrid> = [];
   newDynamic: any = {};
- 
+
   fillInTheBlankTextQuestion: string = '';
   answer: string = '';
-  qlist:any = [];
-newArray : any =[];
-Array : any =[];
+  qlist: any = [];
+  newArray: any = [];
+  Array: any = [];
   answers: string[] = [];
-   newQuestionList: any = [];
+  newQuestionList: any = [];
   showTable: boolean = false;
   fillInTheBlankTextQueData: any = [];
   question: AngularEditorConfig = {
@@ -48,7 +49,7 @@ Array : any =[];
         'insertHorizontalRule',
         'clearFormatting',
         'customClasses',
-        'fontSize'
+        'fontSize',
       ],
     ],
     fonts: [
@@ -73,49 +74,35 @@ Array : any =[];
       },
     ],
   };
-  ngOnInit(): void {
-  
-  }
-
- 
+  ngOnInit(): void {}
 
   onSubmit() {
-    
     this.showTable = true;
-  
+
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
-                  
       this.qlist = {
         id: 3,
         questionType: 'Fill-in-the-blank-text',
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
-        option: 'Answer',
+        option: [''],
       };
-      this.Array.push(this.qlist); 
-      this.localStorageService.set('Question', this.Array);
-      this.fillInTheBlankTextQuestion = '';
-    }
-    else
-    {
-     
-      this.Array = JSON.parse(this.newArray);
-      this.qlist = {
-            id: 3,
-        questionType: 'Fill-in-the-blank-text',
-        question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
-        option: 'Answer',
-      };
-  
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
-     
+      this.fillInTheBlankTextQuestion = '';
+    } else {
+      this.Array = JSON.parse(this.newArray);
+      this.qlist = {
+        id: 3,
+        questionType: 'Fill-in-the-blank-text',
+        question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
+        option: [''],
+      };
+
+      this.Array.push(this.qlist);
+      this.localStorageService.set('Question', this.Array);
+
       this.fillInTheBlankTextQuestion = '';
     }
-    
   }
-
-
-
-
 }
