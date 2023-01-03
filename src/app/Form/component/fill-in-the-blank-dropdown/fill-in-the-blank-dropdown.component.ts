@@ -6,23 +6,29 @@ import { LocalStorageService } from '../../services/local-storage.service';
 @Component({
   selector: 'app-fill-in-the-blank-dropdown',
   templateUrl: './fill-in-the-blank-dropdown.component.html',
-  styleUrls: ['./fill-in-the-blank-dropdown.component.css']
+  styleUrls: ['./fill-in-the-blank-dropdown.component.css'],
 })
 export class FillInTheBlankDropdownComponent implements OnInit {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private componentCommunicationService: ComponentCommunicationService
+  ) {}
 
+
+  ngOnInit(): void {}
+  uniqueIndex: number = 1;
   constructor(private localStorageService: LocalStorageService,
     private componentCommunicationService: ComponentCommunicationService) { }
 
- 
   fillInTheBlankDropdownQuestion: string = '';
-    showTable:boolean = false;
-  showOptionEditor:boolean = false;
-  fillInTheBlankDropdownOption:string = '';
+  showTable: boolean = false;
+  showOptionEditor: boolean = false;
+  fillInTheBlankDropdownOption: string = '';
   newQuestionList: any = [];
-  fillInTheBlankQueData: any =[];
-  qlist:any = [];
-  newArray : any =[];
-  Array : any =[];
+  fillInTheBlankQueData: any = [];
+  qlist: any = [];
+  newArray: any = [];
+  Array: any = [];
   question: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -45,7 +51,7 @@ export class FillInTheBlankDropdownComponent implements OnInit {
         'insertHorizontalRule',
         'clearFormatting',
         'customClasses',
-        'fontSize'
+        'fontSize',
       ],
     ],
     fonts: [
@@ -93,7 +99,7 @@ export class FillInTheBlankDropdownComponent implements OnInit {
         'insertHorizontalRule',
         'clearFormatting',
         'customClasses',
-        'fontSize'
+        'fontSize',
       ],
     ],
     fonts: [
@@ -118,6 +124,7 @@ export class FillInTheBlankDropdownComponent implements OnInit {
       },
     ],
   };
+
   ngOnInit(): void {
     let questionData = this.localStorageService.getData('Question');
     if(questionData){
@@ -128,54 +135,54 @@ export class FillInTheBlankDropdownComponent implements OnInit {
   onAddoption(){
     this.showOptionEditor=true;
   }
-  
+
   onSubmit() {
-    
     this.showTable = true;
-      this.newArray = localStorage.getItem('Question');
+
+    this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
             this.fillInTheBlankDropdownOption =
         this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
       this.fillInTheBlankDropdownOption =
         this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
-      let option = this.fillInTheBlankDropdownOption.split(",");
+      let option = this.fillInTheBlankDropdownOption.split(',');
       this.qlist = {
-        id: 4,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 4,
         questionType: 'Fill-in-the-blank-dropdown',
         question: this.fillInTheBlankDropdownQuestion.replace(/<[^>]+>/g, ''),
         option: option,
+        selectedAnswer: [],
       };
-      this.Array.push(this.qlist); 
+      this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
       this.showOptionEditor = false;
       this.fillInTheBlankDropdownOption = '';
       this.fillInTheBlankDropdownQuestion = '';
-    }
-    else
-    {
-     
+    } else {
       this.Array = JSON.parse(this.newArray);
-      this.fillInTheBlankDropdownOption = this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
-      this.fillInTheBlankDropdownOption = this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
-      let option = this.fillInTheBlankDropdownOption.split(",");
+      this.fillInTheBlankDropdownOption =
+        this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
+      this.fillInTheBlankDropdownOption =
+        this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
+      let option = this.fillInTheBlankDropdownOption.split(',');
       this.qlist = {
-        id: 4,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 4,
         questionType: 'Fill-in-the-blank-dropdown',
         question: this.fillInTheBlankDropdownQuestion.replace(/<[^>]+>/g, ''),
         option: option,
+        selectedAnswer: [],
       };
-  
+
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
+
     //   let data = this.localStorageService.getData('Question');
     // this.componentCommunicationService.emitData(data)
     this.showOptionEditor = false;
     this.fillInTheBlankDropdownOption = '';
     this.fillInTheBlankDropdownQuestion = '';
-
     }
-    
   }
-
-
 }

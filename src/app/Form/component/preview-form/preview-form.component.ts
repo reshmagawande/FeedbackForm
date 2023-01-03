@@ -16,6 +16,9 @@ export class PreviewFormComponent {
   optionList: any = [];
   previewFormObj = PreviewFormModel;
   selectedValue: string;
+
+  multipleResponseList: any = [];
+  list: any = [];
   answer: string;
 
   constructor(
@@ -54,20 +57,25 @@ export class PreviewFormComponent {
     });
   }
 
-  selectAnswer(index, answer) {
-    (<FormArray>this.previewForm.get('questionAnswer'))
-      .get(String(index))
-      .get('answer')
-      .setValue({
-        answer: answer,
-      });
+  selectAnswer(i, index, sublist, mainList) {
+    mainList.selectedAnswer[index] = sublist;
+  }
+
+  multiSelectAnswer(index, answer, event: Event, list) {
+    list.selectedAnswer[index] = answer;
+  }
+
+  onChangeFillInTheBlanks(val, index, list) {
+    this.fillInTheBlanksAnswer(val, index, list);
+  }
+
+  fillInTheBlanksAnswer(val, index, list) {
+    list.answers1[index] = val;
   }
 
   onSubmit() {
-   
-    
-    console.log(this.previewForm.value);
-    this.previewFormObj = this.previewForm.value;
+    console.log('submit', this.dataList);
+    this.previewFormObj = this.dataList;
 
     this.localStorageService.setData(
       'questionAndAnswer',
