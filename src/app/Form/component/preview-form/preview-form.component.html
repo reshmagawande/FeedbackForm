@@ -16,7 +16,7 @@
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
                 <div *ngIf="list.id === 3" class="ml-3">
-                    <input type="text" value="" (click)="selectAnswer(i, sublist)" name="sublist"/>
+                    <input type="text" value="" formControlName="ans" name="sublist"/>
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
             </div>
