@@ -4,7 +4,10 @@
 <div class="container">
   <div class="row mb-12">
     <div class="col-md-12">
-      <mat-toolbar>
+      <button mat-raised-button color="primary" class="ml-3 mb-3" (click)="addAnswer()">
+        Add Answer
+      </button>
+          <mat-toolbar>
         <mat-icon> forum</mat-icon>
         <span class="ml-2">Compose question (Fill in the Blanks - Text)</span>
       </mat-toolbar>
@@ -16,8 +19,12 @@
     </div>
   </div>
 </div>
+
 <div class="container" *ngIf="showTable">
   <app-table [tableInput]="Array"></app-table>
+</div>
+<div>
+
 </div>
 
  

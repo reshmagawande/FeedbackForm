@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
   ]
 
   onEdit(row){
-console.log('row>>>.',row);
+// console.log('row>>>.',row);
   }
  
 ngOnDestroy(){
