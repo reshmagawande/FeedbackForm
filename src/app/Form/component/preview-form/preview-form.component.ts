@@ -16,8 +16,11 @@ export class PreviewFormComponent {
   optionList: any = [];
   previewFormObj = PreviewFormModel;
   selectedValue: string;
-  answer: string;
 
+  multipleResponseList: any = [];
+  list: any = [];
+  answer: string;
+  preview: boolean = false;
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
@@ -25,6 +28,11 @@ export class PreviewFormComponent {
   ) {}
 
   ngOnInit(): void {
+    let questionData = this.localStorageService.getData('Question');
+    if (questionData) {
+      this.preview = true;
+    }
+
     this.previewForm = this.fb.group({
       questionAnswer: this.fb.array([]),
       ans: new FormControl('')
@@ -54,20 +62,28 @@ export class PreviewFormComponent {
     });
   }
 
-  selectAnswer(index, answer) {
-    (<FormArray>this.previewForm.get('questionAnswer'))
-      .get(String(index))
-      .get('answer')
-      .setValue({
-        answer: answer,
-      });
+  selectAnswer(i, index, sublist, mainList) {
+    mainList.selectedAnswer[index] = sublist;
+  }
+
+  multiSelectAnswer(index, answer, event: Event, list) {
+    list.selectedAnswer[index] = answer;
+  }
+
+  onChangeFillInTheBlanks(val, index, list) {
+    console.log('val',val)
+    this.fillInTheBlanksAnswer(val, index, list);
+  }
+
+  fillInTheBlanksAnswer(val, index, list) {
+    console.log('val',val)
+    list.selectedAnswer[index] = val;
+    console.log('list.answer[index]',list.selectedAnswer[index])
   }
 
   onSubmit() {
-   
-    
-    console.log(this.previewForm.value);
-    this.previewFormObj = this.previewForm.value;
+    console.log('submit', this.dataList);
+    this.previewFormObj = this.dataList;
 
     this.localStorageService.setData(
       'questionAndAnswer',

@@ -12,9 +12,9 @@ export class ResponseScreenComponent {
   constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
-    let data = [this.localStorageService.getData('questionAndAnswer')];
+    let data = this.localStorageService.getData('questionAndAnswer');
     data.forEach((ele: any) => {
-      this.dataList = ele.questionAnswer;
+      this.dataList.push(ele);
     });
   }
 }

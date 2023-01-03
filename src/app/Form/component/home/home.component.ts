@@ -14,13 +14,12 @@ export class HomeComponent implements OnInit {
   homeForm!: FormGroup;
   formValueObj: any;
   questionIndex: number = 0;
-
   constructor(private fb: FormBuilder,
     private router:Router,
     private localStorageService : LocalStorageService) { }
 
   ngOnInit(): void {
-    this.homeForm = this.fb.group({
+       this.homeForm = this.fb.group({
 
       questionTypeCtrl: [''],
 
