@@ -7,9 +7,11 @@
         <div *ngFor="let list of dataList; let i = index" class="mt-2">
             <div>{{i+1}}. {{ list.question }}</div>
             <div *ngFor="let sublist of list['option']; let index = index">
+
                 <div *ngIf="list.questionTypeId === 1" class="ml-3">
                     <input type="radio" value="sublist" (click)="selectAnswer(i, index, sublist, list)"
                         name="sublist{{i}}" />
+
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
                 <div *ngIf="list.questionTypeId === 2" class="ml-3">
@@ -18,6 +20,8 @@
                 </div>
                 <!-- <div *ngIf="list.questionTypeId === 3" class="ml-3">
                     <input type="text" value="sublist" (click)="selectAnswer(i, sublist)" />
+
+               
                     <label class="ml-1">{{ sublist }}</label>
                 </div> -->
 

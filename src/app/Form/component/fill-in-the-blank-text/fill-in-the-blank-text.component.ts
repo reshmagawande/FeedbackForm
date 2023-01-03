@@ -25,8 +25,12 @@ export class FillInTheBlankTextComponent implements OnInit {
   Array: any = [];
   answers: string[] = [];
   newQuestionList: any = [];
+  blanks: any = [];
   showTable: boolean = false;
   fillInTheBlankTextQueData: any = [];
+ ans:string = '{{Answer}}';
+ cursorPosition: number;
+ answerIndex: number = 0;
   question: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -74,7 +78,27 @@ export class FillInTheBlankTextComponent implements OnInit {
       },
     ],
   };
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    
+    let questionData = this.localStorageService.getData('Question');
+    if(questionData){
+      this.showTable = true;
+    }
+  }
+ 
+
+addAnswer()
+{
+  this.answerIndex = this.answerIndex + 1;
+  console.log('answerIndex',this.answerIndex)
+let selection = window.getSelection().getRangeAt(0);
+let parentNode = document.createElement("a"); //create a custom node to insert
+selection.insertNode(parentNode);
+let ans = "Answer"+this.answerIndex;
+parentNode.insertAdjacentHTML("beforebegin", "{{"+ans+"}}");
+this.blanks.push(this.answerIndex); 
+}
 
   onSubmit() {
     this.showTable = true;
@@ -88,6 +112,8 @@ export class FillInTheBlankTextComponent implements OnInit {
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
         selectedAnswer: [],
+        blanks: this.blanks
+
       };
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
@@ -101,12 +127,18 @@ export class FillInTheBlankTextComponent implements OnInit {
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
         selectedAnswer: [],
-      };
+        blanks: this.blanks
 
+      };
+      this.answerIndex =0;
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
 
       this.fillInTheBlankTextQuestion = '';
     }
+  }
+
+  ngOnDestroy() {
+    this.answerIndex = 0;
   }
 }

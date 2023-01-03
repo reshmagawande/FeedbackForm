@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { PreviewFormModel } from '../../model/previewForm';
@@ -16,8 +16,10 @@ export class PreviewFormComponent {
   optionList: any = [];
   previewFormObj = PreviewFormModel;
   selectedValue: string;
+
   multipleResponseList: any = [];
   list: any = [];
+  answer: string;
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +30,7 @@ export class PreviewFormComponent {
   ngOnInit(): void {
     this.previewForm = this.fb.group({
       questionAnswer: this.fb.array([]),
+      ans: new FormControl('')
     });
 
     this.dataList = this.localStorageService.getData('Question');
