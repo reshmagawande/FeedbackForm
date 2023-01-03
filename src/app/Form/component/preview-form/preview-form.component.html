@@ -4,28 +4,36 @@
             <h3>Test Screen</h3>
         </div>
 
-        <div *ngFor="let list of dataList; let i = index">
+        <div *ngFor="let list of dataList; let i = index" class="mt-2">
             <div>{{i+1}}. {{ list.question }}</div>
             <div *ngFor="let sublist of list['option']; let index = index">
-                <div *ngIf="list.id === 1" class="ml-3">
-                    <input type="radio" value="sublist" (click)="selectAnswer(i, sublist)" name="sublist" />
+                <div *ngIf="list.questionTypeId === 1" class="ml-3">
+                    <input type="radio" value="sublist" (click)="selectAnswer(i, index, sublist, list)"
+                        name="sublist{{i}}" />
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
-                <div *ngIf="list.id === 2" class="ml-3">
-                    <input type="checkbox" value="sublist" (click)="selectAnswer(i, sublist)" name="sublist" />
+                <div *ngIf="list.questionTypeId === 2" class="ml-3">
+                    <input type="checkbox" (change)="multiSelectAnswer(index, sublist, $event, list)">
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
-                <div *ngIf="list.id === 3" class="ml-3">
+                <!-- <div *ngIf="list.questionTypeId === 3" class="ml-3">
                     <input type="text" value="sublist" (click)="selectAnswer(i, sublist)" />
                     <label class="ml-1">{{ sublist }}</label>
+                </div> -->
+
+                <!-- Testing with static values -->
+                <div *ngFor="let temp of list['blanks']; let index = index" class="mt-2">
+                    <input type="text" #myInput placeholder="Answer {{index+1}}"
+                        (change)="onChangeFillInTheBlanks(myInput.value, index, list)" class="form-control col-md-2">
                 </div>
+
             </div>
-            <div *ngIf="list.id === 4" class="ml-3">
+            <div *ngIf="list.questionTypeId === 4" class="ml-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Please Select</mat-label>
                     <mat-select>
                         <mat-option [value]="sublist" *ngFor="let sublist of list['option']; let index = index"
-                            (click)="selectAnswer(i, sublist)">
+                            (click)="selectAnswer(i, index, sublist, list)">
                             {{sublist}}
                         </mat-option>
                     </mat-select>

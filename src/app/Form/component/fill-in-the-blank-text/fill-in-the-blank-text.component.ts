@@ -17,7 +17,7 @@ export class FillInTheBlankTextComponent implements OnInit {
 
   dynamicArray: Array<DynamicGrid> = [];
   newDynamic: any = {};
-
+  uniqueIndex: number = 1;
   fillInTheBlankTextQuestion: string = '';
   answer: string = '';
   qlist: any = [];
@@ -82,10 +82,12 @@ export class FillInTheBlankTextComponent implements OnInit {
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
       this.qlist = {
-        id: 3,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 3,
         questionType: 'Fill-in-the-blank-text',
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
+        selectedAnswer: [],
       };
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
@@ -93,10 +95,12 @@ export class FillInTheBlankTextComponent implements OnInit {
     } else {
       this.Array = JSON.parse(this.newArray);
       this.qlist = {
-        id: 3,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 3,
         questionType: 'Fill-in-the-blank-text',
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
+        selectedAnswer: [],
       };
 
       this.Array.push(this.qlist);

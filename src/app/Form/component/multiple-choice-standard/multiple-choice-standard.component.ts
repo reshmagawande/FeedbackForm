@@ -20,8 +20,9 @@ export class MultipleChoiceStandardComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  uniqueIndex: number = 1;
 
+  ngOnInit(): void {
     this.questionvalue = this.multipleChoiceStandardQuestion.replace(
       /<[^>]+>/g,
       ''
@@ -137,51 +138,51 @@ export class MultipleChoiceStandardComponent implements OnInit {
     this.showOptionEditor = true;
     this.multipleChoiceStandardQuestion;
   }
-  
 
   onSubmit() {
     this.showTable = true;
 
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
-      
       this.multipleChoiceStandardOption =
         this.multipleChoiceStandardOption.replace(/<p>/gm, ',');
       this.multipleChoiceStandardOption =
         this.multipleChoiceStandardOption.replace(/<[^>]+>/gm, '');
-          let option = this.multipleChoiceStandardOption.split(",");
+      let option = this.multipleChoiceStandardOption.split(',');
       this.qlist = {
-        id: 1,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 1,
         questionType: 'Multiple Choice - Standard',
         question: this.multipleChoiceStandardQuestion.replace(/<[^>]+>/g, ''),
         option: option,
+        selectedAnswer: [],
       };
-      this.Array.push(this.qlist); 
+      this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
-         this.showOptionEditor = false;
-    this.multipleChoiceStandardOption = '';
-    this.multipleChoiceStandardQuestion = '';
-    }
-    else
-    {
-     
+      this.showOptionEditor = false;
+      this.multipleChoiceStandardOption = '';
+      this.multipleChoiceStandardQuestion = '';
+    } else {
       this.Array = JSON.parse(this.newArray);
-      this.multipleChoiceStandardOption = this.multipleChoiceStandardOption.replace(/<p>/gm, ',');
-      this.multipleChoiceStandardOption = this.multipleChoiceStandardOption.replace(/<[^>]+>/gm, '');
-         let option = this.multipleChoiceStandardOption.split(",");
+      this.multipleChoiceStandardOption =
+        this.multipleChoiceStandardOption.replace(/<p>/gm, ',');
+      this.multipleChoiceStandardOption =
+        this.multipleChoiceStandardOption.replace(/<[^>]+>/gm, '');
+      let option = this.multipleChoiceStandardOption.split(',');
       this.qlist = {
-        id: 1,
+        uniqueIndex: this.uniqueIndex++,
+        questionTypeId: 1,
         questionType: 'Multiple Choice - Standard',
         question: this.multipleChoiceStandardQuestion.replace(/<[^>]+>/g, ''),
         option: option,
+        selectedAnswer: [],
       };
-  
+
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
       this.showOptionEditor = false;
       this.multipleChoiceStandardOption = '';
       this.multipleChoiceStandardQuestion = '';
     }
-    
   }
 }
