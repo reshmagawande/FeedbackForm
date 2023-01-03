@@ -9,16 +9,11 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./fill-in-the-blank-dropdown.component.css'],
 })
 export class FillInTheBlankDropdownComponent implements OnInit {
-  constructor(
-    private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService
-  ) {}
 
 
-  ngOnInit(): void {}
+
   uniqueIndex: number = 1;
-  constructor(private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService) { }
+  constructor(private localStorageService: LocalStorageService) { }
 
   fillInTheBlankDropdownQuestion: string = '';
   showTable: boolean = false;

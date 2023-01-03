@@ -18,19 +18,16 @@
                     <input type="checkbox" (change)="multiSelectAnswer(index, sublist, $event, list)">
                     <label class="ml-1">{{ sublist }}</label>
                 </div>
-                <!-- <div *ngIf="list.questionTypeId === 3" class="ml-3">
-                    <input type="text" value="sublist" (click)="selectAnswer(i, sublist)" />
-
-               
-                    <label class="ml-1">{{ sublist }}</label>
-                </div> -->
-
-                <!-- Testing with static values -->
-                <div *ngFor="let temp of list['blanks']; let index = index" class="mt-2">
-                    <input type="text" #myInput placeholder="Answer {{index+1}}"
+                <div *ngIf="list.questionTypeId === 3"  class="mt-2">
+                    <div *ngFor="let temp of list['blanks']; let index = index">
+                        <input type="text" #myInput placeholder="Answer {{index+1}}"
                         (change)="onChangeFillInTheBlanks(myInput.value, index, list)" class="form-control col-md-2">
+                    <label class="ml-1">{{ sublist }}</label>
+                    </div>
                 </div>
 
+                <!-- Testing with static values -->
+               
             </div>
             <div *ngIf="list.questionTypeId === 4" class="ml-3">
                 <mat-form-field appearance="outline">

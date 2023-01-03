@@ -15,8 +15,9 @@
     </div>
     <div *ngFor="let list of dataList; let i = index">
         <div class="mt-2">{{i+1}}. {{ list.question }}</div>
-        <div *ngFor="let answer of list.selectedAnswer;">
-            <div style="padding: 3px;">{{ answer }}</div>
-        </div>
+        <div style="padding: 3px;">{{ list.selectedAnswer}}</div>
+        <!-- <div *ngFor="let answer of list.selectedAnswer;">
+            <div style="padding: 3px;">{{ answer}}</div>
+        </div> -->
     </div>
 </div>

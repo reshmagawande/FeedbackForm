@@ -20,7 +20,7 @@ export class PreviewFormComponent {
   multipleResponseList: any = [];
   list: any = [];
   answer: string;
-
+  preview: boolean = false;
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
@@ -28,6 +28,11 @@ export class PreviewFormComponent {
   ) {}
 
   ngOnInit(): void {
+    let questionData = this.localStorageService.getData('Question');
+    if (questionData) {
+      this.preview = true;
+    }
+
     this.previewForm = this.fb.group({
       questionAnswer: this.fb.array([]),
       ans: new FormControl('')
@@ -66,11 +71,14 @@ export class PreviewFormComponent {
   }
 
   onChangeFillInTheBlanks(val, index, list) {
+    console.log('val',val)
     this.fillInTheBlanksAnswer(val, index, list);
   }
 
   fillInTheBlanksAnswer(val, index, list) {
-    list.answers1[index] = val;
+    console.log('val',val)
+    list.selectedAnswer[index] = val;
+    console.log('list.answer[index]',list.selectedAnswer[index])
   }
 
   onSubmit() {

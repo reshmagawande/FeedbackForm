@@ -120,10 +120,12 @@ export class MultipleChoiceMultipleResponseComponent implements OnInit {
     ],
   };
 
-  ngOnInit(): void {  let questionData = this.localStorageService.getData('Question');
-  if(questionData){
-    this.showTable = true;
-  }}
+  ngOnInit(): void {
+    let questionData = this.localStorageService.getData('Question');
+    if (questionData) {
+      this.showTable = true;
+    }
+  }
 
   onAddoption() {
     this.showOptionEditor = true;
@@ -131,9 +133,7 @@ export class MultipleChoiceMultipleResponseComponent implements OnInit {
   }
 
   onSubmit() {
-    
-  this.showTable = false;
-
+    this.showTable = false;
 
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
@@ -176,16 +176,12 @@ export class MultipleChoiceMultipleResponseComponent implements OnInit {
         ),
         option: option,
       };
-
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
-
-        let multipleChoiceMultiResponseQuestionData = this.localStorageService.getData('Question');
-
-    this.componentCommunicationService.emitData(multipleChoiceMultiResponseQuestionData)
-  this.showTable = true;
-    this.showOptionEditor = false;
-    this.multipleChoiceMultiResponseOption = '';
-    this.multipleChoiceMultiResponseQuestion = '';
+      this.showTable = true;
+      this.showOptionEditor = false;
+      this.multipleChoiceMultiResponseOption = '';
+      this.multipleChoiceMultiResponseQuestion = '';
+    }
   }
 }

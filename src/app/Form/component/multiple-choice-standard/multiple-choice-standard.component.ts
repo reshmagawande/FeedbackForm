@@ -21,15 +21,15 @@ export class MultipleChoiceStandardComponent implements OnInit {
 
   uniqueIndex: number = 1;
 
-  ngOnInit(): void {
-   let questionData = this.localStorageService.getData('Question');
+  // ngOnInit(): void {
+  //  let questionData = this.localStorageService.getData('Question');
 
-    if(questionData){
+  //   if(questionData){
 
-      this.showTable = true;
+  //     this.showTable = true;
 
-    }
-  }
+  //   }
+  // }
 
   multipleChoiceStandardQuestion = '';
   showOptionEditor: boolean = false;
