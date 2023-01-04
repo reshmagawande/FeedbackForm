@@ -16,11 +16,10 @@ export class PreviewFormComponent {
   optionList: any = [];
   previewFormObj = PreviewFormModel;
   selectedValue: string;
-
   multipleResponseList: any = [];
   list: any = [];
   answer: string;
-  preview: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private localStorageService: LocalStorageService,
@@ -28,17 +27,33 @@ export class PreviewFormComponent {
   ) {}
 
   ngOnInit(): void {
-    let questionData = this.localStorageService.getData('Question');
-    if (questionData) {
-      this.preview = true;
-    }
-
     this.previewForm = this.fb.group({
       questionAnswer: this.fb.array([]),
-      ans: new FormControl('')
+      ans: new FormControl(''),
     });
 
     this.dataList = this.localStorageService.getData('Question');
+
+    console.log('datalist >>', this.dataList);
+
+    this.dataList.forEach((element) => {
+      let questionIscorrect: boolean[] = [];
+      if (element.questionTypeId === 3) {
+        var queArray = element.question.split(' ');
+
+        queArray.forEach((ele) => {
+          let k = 0;
+          if (ele.includes('{{')) {
+            questionIscorrect.push(false);
+          } else {
+            questionIscorrect.push(true);
+          }
+          k++;
+        });
+      }
+      element.quesArray = queArray;
+      element.questionIscorrect = questionIscorrect;
+    });
 
     this.dataList.forEach((e) => {
       let frmControl: FormGroup = this.fb.group({
@@ -66,19 +81,28 @@ export class PreviewFormComponent {
     mainList.selectedAnswer[index] = sublist;
   }
 
-  multiSelectAnswer(index, answer, event: Event, list) {
-    list.selectedAnswer[index] = answer;
+  multiSelectAnswer(index, answer, event, list) {
+    const ischecked = (<HTMLInputElement>event.target).checked;
+    // console.log('event', ischecked);
+    if (ischecked) {
+      list.selectedAnswer[index] = answer;
+      console.log('if', list.selectedAnswer);
+    } else {
+      // list.selectedAnswer.splice(index, 1);
+      let arr1 = list.selectedAnswer.filter(
+        (item, index) => list.selectedAnswer.indexOf(item) === index
+      );
+
+      console.log('else', arr1);
+    }
   }
 
   onChangeFillInTheBlanks(val, index, list) {
-    console.log('val',val)
     this.fillInTheBlanksAnswer(val, index, list);
   }
 
   fillInTheBlanksAnswer(val, index, list) {
-    console.log('val',val)
     list.selectedAnswer[index] = val;
-    console.log('list.answer[index]',list.selectedAnswer[index])
   }
 
   onSubmit() {
