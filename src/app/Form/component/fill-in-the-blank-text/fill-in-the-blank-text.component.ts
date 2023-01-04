@@ -95,7 +95,7 @@ export class FillInTheBlankTextComponent implements OnInit {
 
   onSubmit() {
     this.showTable = true;
-
+    this.fillInTheBlankTextQuestion = this.fillInTheBlankTextQuestion.replace(/&#160;/g, ' ');
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
       this.qlist = {
