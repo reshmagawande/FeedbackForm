@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
@@ -9,11 +8,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./fill-in-the-blank-dropdown.component.css'],
 })
 export class FillInTheBlankDropdownComponent implements OnInit {
-
-
-
   uniqueIndex: number = 1;
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService) {}
 
   fillInTheBlankDropdownQuestion: string = '';
   showTable: boolean = false;
@@ -122,13 +118,13 @@ export class FillInTheBlankDropdownComponent implements OnInit {
 
   ngOnInit(): void {
     let questionData = this.localStorageService.getData('Question');
-    if(questionData){
+    if (questionData) {
       this.showTable = true;
     }
   }
 
-  onAddoption(){
-    this.showOptionEditor=true;
+  onAddoption() {
+    this.showOptionEditor = true;
   }
 
   onSubmit() {
@@ -136,7 +132,7 @@ export class FillInTheBlankDropdownComponent implements OnInit {
 
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
-            this.fillInTheBlankDropdownOption =
+      this.fillInTheBlankDropdownOption =
         this.fillInTheBlankDropdownOption.replace(/<p>/gm, ',');
       this.fillInTheBlankDropdownOption =
         this.fillInTheBlankDropdownOption.replace(/<[^>]+>/gm, '');
@@ -173,11 +169,11 @@ export class FillInTheBlankDropdownComponent implements OnInit {
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
 
-    //   let data = this.localStorageService.getData('Question');
-    // this.componentCommunicationService.emitData(data)
-    this.showOptionEditor = false;
-    this.fillInTheBlankDropdownOption = '';
-    this.fillInTheBlankDropdownQuestion = '';
+      //   let data = this.localStorageService.getData('Question');
+      // this.componentCommunicationService.emitData(data)
+      this.showOptionEditor = false;
+      this.fillInTheBlankDropdownOption = '';
+      this.fillInTheBlankDropdownQuestion = '';
     }
   }
 }

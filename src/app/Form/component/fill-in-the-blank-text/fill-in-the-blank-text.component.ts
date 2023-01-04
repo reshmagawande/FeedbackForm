@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DynamicGrid } from '../../model/DynamicGrid';
-import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
@@ -10,10 +9,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./fill-in-the-blank-text.component.css'],
 })
 export class FillInTheBlankTextComponent implements OnInit {
-  constructor(
-    private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService
-  ) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   dynamicArray: Array<DynamicGrid> = [];
   newDynamic: any = {};
@@ -28,9 +24,9 @@ export class FillInTheBlankTextComponent implements OnInit {
   blanks: any = [];
   showTable: boolean = false;
   fillInTheBlankTextQueData: any = [];
- ans:string = '{{Answer}}';
- cursorPosition: number;
- answerIndex: number = 0;
+  ans: string = '{{Answer}}';
+  cursorPosition: number;
+  answerIndex: number = 0;
   question: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -80,25 +76,22 @@ export class FillInTheBlankTextComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    
     let questionData = this.localStorageService.getData('Question');
-    if(questionData){
+    if (questionData) {
       this.showTable = true;
     }
   }
- 
 
-addAnswer()
-{
-  this.answerIndex = this.answerIndex + 1;
-  console.log('answerIndex',this.answerIndex)
-let selection = window.getSelection().getRangeAt(0);
-let parentNode = document.createElement("a"); //create a custom node to insert
-selection.insertNode(parentNode);
-let ans = "Answer"+this.answerIndex;
-parentNode.insertAdjacentHTML("beforebegin", "{{"+ans+"}}");
-this.blanks.push(this.answerIndex); 
-}
+  addAnswer() {
+    this.answerIndex = this.answerIndex + 1;
+    console.log('answerIndex', this.answerIndex);
+    let selection = window.getSelection().getRangeAt(0);
+    let parentNode = document.createElement('a'); //create a custom node to insert
+    selection.insertNode(parentNode);
+    let ans = 'Answer' + this.answerIndex;
+    parentNode.insertAdjacentHTML('beforebegin', '{{' + ans + '}}');
+    this.blanks.push(this.answerIndex);
+  }
 
   onSubmit() {
     this.showTable = true;
@@ -112,8 +105,7 @@ this.blanks.push(this.answerIndex);
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
         selectedAnswer: [],
-        blanks: this.blanks
-
+        blanks: this.blanks,
       };
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
@@ -127,10 +119,9 @@ this.blanks.push(this.answerIndex);
         question: this.fillInTheBlankTextQuestion.replace(/<[^>]+>/g, ''),
         option: [''],
         selectedAnswer: [],
-        blanks: this.blanks
-
+        blanks: this.blanks,
       };
-      this.answerIndex =0;
+      this.answerIndex = 0;
       this.Array.push(this.qlist);
       this.localStorageService.set('Question', this.Array);
 

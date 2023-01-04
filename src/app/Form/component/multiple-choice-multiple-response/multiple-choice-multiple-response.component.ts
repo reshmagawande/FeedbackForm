@@ -1,7 +1,5 @@
 import { Component, OnInit, QueryList } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subject } from 'rxjs';
-import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
@@ -10,10 +8,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
   styleUrls: ['./multiple-choice-multiple-response.component.css'],
 })
 export class MultipleChoiceMultipleResponseComponent implements OnInit {
-  constructor(
-    private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService
-  ) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   multipleChoiceMultiResponseQuestion = '';
   showOptionEditor: boolean = false;

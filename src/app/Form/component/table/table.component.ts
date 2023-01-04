@@ -1,54 +1,43 @@
-import { Component, OnInit,OnChanges, Input} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  // dataSource = new MatTableDataSource<any>();
   @Input() tableInput: [];
-  
-  dataSource: any;
-  tabledata: Subscription | undefined
-  constructor( private componentCommunicationService: ComponentCommunicationService,
-    private localStorageService: LocalStorageService) {
-   
-  this.tableData();
 
-   }
+  dataSource: any;
+  tabledata: Subscription | undefined;
+  constructor(private localStorageService: LocalStorageService) {
+    this.tableData();
+  }
 
   ngOnInit(): void {
     this.tableData();
   }
-  ngOnChanges(){
+  ngOnChanges() {
     console.log(this.tableInput);
     this.dataSource = this.tableInput;
   }
 
-  tableData(){
-    let multipleChoiceStandardQuestionData = this.localStorageService.getData('Question');
+  tableData() {
+    let multipleChoiceStandardQuestionData =
+      this.localStorageService.getData('Question');
     this.dataSource = multipleChoiceStandardQuestionData;
-
   }
 
   displayedColumns: Array<string> = [
     'index',
     'questionType',
     'question',
-    'options'
-    // ,'actions'
-  ]
+    'options',
+  ];
 
-  onEdit(row){
-// console.log('row>>>.',row);
+  ngOnDestroy() {
+    this.tabledata?.unsubscribe();
   }
- 
-ngOnDestroy(){
-  this.tabledata?.unsubscribe();
-}
 }

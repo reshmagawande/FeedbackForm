@@ -5,31 +5,42 @@
         </div>
 
         <div *ngFor="let list of dataList; let i = index" class="mt-2">
-            <div>{{i+1}}. {{ list.question }}</div>
-            <div *ngFor="let sublist of list['option']; let index = index">
 
-                <div *ngIf="list.questionTypeId === 1" class="ml-3">
-                    <input type="radio" value="sublist" (click)="selectAnswer(i, index, sublist, list)"
-                        name="sublist{{i}}" />
+            <div *ngIf="list.questionTypeId === 1 || list.questionTypeId === 2 " class="ml-3">
+                <div>{{i+1}}. {{ list.question }}</div>
+                <div *ngFor="let sublist of list['option']; let index = index">
 
-                    <label class="ml-1">{{ sublist }}</label>
+                    <div *ngIf="list.questionTypeId === 1" class="ml-3">
+                        <input type="radio" value="sublist" (click)="selectAnswer(i, index, sublist, list)"
+                            name="sublist{{i}}" />
+
+                        <label class="ml-1">{{ sublist }}</label>
+                    </div>
+                    <div *ngIf="list.questionTypeId === 2" class="ml-3">
+                        <input type="checkbox" (change)="multiSelectAnswer(index, sublist, $event, list)">
+                        <label class="ml-1">{{ sublist }}</label>
+                    </div>
+
                 </div>
-                <div *ngIf="list.questionTypeId === 2" class="ml-3">
-                    <input type="checkbox" (change)="multiSelectAnswer(index, sublist, $event, list)">
-                    <label class="ml-1">{{ sublist }}</label>
-                </div>
-                <div *ngIf="list.questionTypeId === 3"  class="mt-2">
-                    <div *ngFor="let temp of list['blanks']; let index = index">
-                        <input type="text" #myInput placeholder="Answer {{index+1}}"
-                        (change)="onChangeFillInTheBlanks(myInput.value, index, list)" class="form-control col-md-2">
-                    <label class="ml-1">{{ sublist }}</label>
+            </div>
+
+            <div *ngIf="list.questionTypeId === 3" class="mt-2 ml-3">
+                <div style="display: flex">
+                    <div>{{i+1}}. </div>
+                    <div *ngFor="let quesArray of list['quesArray']; let blanksIndex = index">
+                        <div *ngIf="!list.questionIscorrect[blanksIndex] else elseContent">
+                            <input type="text" #myInput
+                                (change)="onChangeFillInTheBlanks(myInput.value, blanksIndex, list)"
+                                class="form-control" placeholder="Answer {{blanksIndex}}" />
+                        </div>
+                        <ng-template #elseContent>
+                            {{quesArray}}
+                        </ng-template>
                     </div>
                 </div>
-
-                <!-- Testing with static values -->
-               
             </div>
             <div *ngIf="list.questionTypeId === 4" class="ml-3">
+                <div>{{i+1}}. {{ list.question }}</div>
                 <mat-form-field appearance="outline">
                     <mat-label>Please Select</mat-label>
                     <mat-select>

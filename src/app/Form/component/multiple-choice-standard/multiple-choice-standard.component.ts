@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subject } from 'rxjs';
-import { ComponentCommunicationService } from '../../services/component-communication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { TableComponent } from '../table/table.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,25 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./multiple-choice-standard.component.css'],
 })
 export class MultipleChoiceStandardComponent implements OnInit {
-  constructor(
-    private localStorageService: LocalStorageService,
-    private componentCommunicationService: ComponentCommunicationService,
-    private router: Router
-  ) {}
-
-
+  constructor(private localStorageService: LocalStorageService) {}
   uniqueIndex: number = 1;
-
-  // ngOnInit(): void {
-  //  let questionData = this.localStorageService.getData('Question');
-
-  //   if(questionData){
-
-  //     this.showTable = true;
-
-  //   }
-  // }
-
   multipleChoiceStandardQuestion = '';
   showOptionEditor: boolean = false;
   multipleChoiceStandardOption: any = [];
@@ -39,7 +19,7 @@ export class MultipleChoiceStandardComponent implements OnInit {
   Array: any = [];
   newArray: any = [];
   multipleChoiceStdQuestionData: any = [];
- 
+
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -135,12 +115,11 @@ export class MultipleChoiceStandardComponent implements OnInit {
     ],
   };
   ngOnInit(): void {
-
     let questionData = this.localStorageService.getData('Question');
-    if(questionData){
+    if (questionData) {
       this.showTable = true;
     }
-   }
+  }
 
   onAddoption() {
     this.showOptionEditor = true;

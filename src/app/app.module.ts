@@ -19,30 +19,29 @@ import { PreviewFormComponent } from './Form/component/preview-form/preview-form
 import { ResponseScreenComponent } from './Form/component/response-screen/response-screen.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        MultipleChoiceStandardComponent,
-        MultipleChoiceMultipleResponseComponent,
-        FillInTheBlankTextComponent,
-        TableComponent,
-        FillInTheBlankDropdownComponent,
-        TopNavbarComponent,
-        PreviewFormComponent,
-        ResponseScreenComponent,
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MaterialModule,
-        BrowserAnimationsModule,
-        AngularEditorModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        
-    ]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    MultipleChoiceStandardComponent,
+    MultipleChoiceMultipleResponseComponent,
+    FillInTheBlankTextComponent,
+    TableComponent,
+    FillInTheBlankDropdownComponent,
+    TopNavbarComponent,
+    PreviewFormComponent,
+    ResponseScreenComponent,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    AngularEditorModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
 })
 export class AppModule {}
