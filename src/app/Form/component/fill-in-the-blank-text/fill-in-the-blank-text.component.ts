@@ -84,7 +84,6 @@ export class FillInTheBlankTextComponent implements OnInit {
 
   addAnswer() {
     this.answerIndex = this.answerIndex + 1;
-    console.log('answerIndex', this.answerIndex);
     let selection = window.getSelection().getRangeAt(0);
     let parentNode = document.createElement('a'); //create a custom node to insert
     selection.insertNode(parentNode);

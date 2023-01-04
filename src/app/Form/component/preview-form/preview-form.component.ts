@@ -34,8 +34,6 @@ export class PreviewFormComponent {
 
     this.dataList = this.localStorageService.getData('Question');
 
-    console.log('datalist >>', this.dataList);
-
     this.dataList.forEach((element) => {
       let questionIscorrect: boolean[] = [];
       if (element.questionTypeId === 3) {
@@ -78,22 +76,18 @@ export class PreviewFormComponent {
   }
 
   selectAnswer(i, index, sublist, mainList) {
+    mainList.selectedAnswer = [];
     mainList.selectedAnswer[index] = sublist;
   }
 
   multiSelectAnswer(index, answer, event, list) {
     const ischecked = (<HTMLInputElement>event.target).checked;
-    // console.log('event', ischecked);
     if (ischecked) {
       list.selectedAnswer[index] = answer;
-      console.log('if', list.selectedAnswer);
     } else {
-      // list.selectedAnswer.splice(index, 1);
-      let arr1 = list.selectedAnswer.filter(
-        (item, index) => list.selectedAnswer.indexOf(item) === index
+      list.selectedAnswer = list.selectedAnswer.filter(
+        (e: any) => e !== answer
       );
-
-      console.log('else', arr1);
     }
   }
 
@@ -106,7 +100,6 @@ export class PreviewFormComponent {
   }
 
   onSubmit() {
-    console.log('submit', this.dataList);
     this.previewFormObj = this.dataList;
 
     this.localStorageService.setData(

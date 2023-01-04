@@ -20,7 +20,6 @@ export class TableComponent implements OnInit {
     this.tableData();
   }
   ngOnChanges() {
-    console.log(this.tableInput);
     this.dataSource = this.tableInput;
   }
 
