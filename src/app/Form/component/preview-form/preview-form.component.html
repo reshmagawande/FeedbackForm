@@ -31,10 +31,10 @@
                         <div *ngIf="!list.questionIscorrect[blanksIndex] else elseContent">
                             <input type="text" #myInput
                                 (change)="onChangeFillInTheBlanks(myInput.value, blanksIndex, list)"
-                                class="form-control" placeholder="Answer {{blanksIndex}}" />
+                                class="form-control" placeholder="Enter Answer" />
                         </div>
                         <ng-template #elseContent>
-                            {{quesArray}}
+                            {{quesArray+"&nbsp;"}}
                         </ng-template>
                     </div>
                 </div>
