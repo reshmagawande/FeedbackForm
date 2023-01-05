@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { DynamicGrid } from '../../model/DynamicGrid';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
@@ -11,7 +10,6 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class FillInTheBlankTextComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService) {}
 
-  dynamicArray: Array<DynamicGrid> = [];
   newDynamic: any = {};
   uniqueIndex: number = 1;
   fillInTheBlankTextQuestion: string = '';
@@ -94,7 +92,10 @@ export class FillInTheBlankTextComponent implements OnInit {
 
   onSubmit() {
     this.showTable = true;
-    this.fillInTheBlankTextQuestion = this.fillInTheBlankTextQuestion.replace(/&#160;/g, ' ');
+    this.fillInTheBlankTextQuestion = this.fillInTheBlankTextQuestion.replace(
+      /&#160;/g,
+      ' '
+    );
     this.newArray = localStorage.getItem('Question');
     if (this.newArray == null) {
       this.qlist = {
